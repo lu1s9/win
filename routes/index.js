@@ -1,26 +1,17 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const { body, validationResult } = require('express-validator');
+const { body, validationResult } = require("express-validator");
+const controller = require("../controllers/controller");
 
-router.get('/', (req,res) => {
-  res.render('index')
-})
+router.get("/", controller.index);
 
-router.get('/admin', (req, res) => {
-  res.render('admin')
-})
+router.get("/admin", controller.admin);
 
-router.post('/admin', 
-  body('user').exists().not().isEmpty(),
-  body('password').exists().not().isEmpty(),
-  (req,res) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-     res.render('admin', {validaciones: errors.array()})
-  }
-  else{
-    res.send('Validacion exitosa')
-  }
-})
+router.post(
+  "/admin",
+  body("user").exists().not().isEmpty(),
+  body("password").exists().not().isEmpty(),
+  controller.admin_login
+);
 
 module.exports = router;
