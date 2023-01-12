@@ -4,6 +4,9 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
+const passport= require('passport')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -19,6 +22,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false,
+  store: new SQLiteStore({ db: process.env.SESSION_DB, dir: process.env.DIR_DB })
+}));
+app.use(passport.authenticate('session'));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

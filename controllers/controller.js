@@ -1,5 +1,6 @@
 const sqlite3 = require("sqlite3");
-const { body, validationResult } = require("express-validator");
+const {validationResult } = require("express-validator");
+const passport = require("passport");
 
 const db = new sqlite3.Database(process.env.DB, (err) => {
   if (err) {
@@ -9,18 +10,20 @@ const db = new sqlite3.Database(process.env.DB, (err) => {
 });
 
 exports.index = (req, res) => {
-  let primerTiempo, segundoTiempo, tercerTiempo;
   db.get("SELECT * FROM menu WHERE id_menu=?", 1, (err, menu) => {
     callback(menu);
   });
-
   function callback(menu) {
     res.render("index", { menu: menu });
   }
 };
 
 exports.admin = (req, res) => {
-  res.render("admin");
+  if (req.user) {
+    res.redirect("/admin/menu");
+  } else{
+    res.render("admin");
+  }
 };
 
 exports.admin_login = (req, res) => {
@@ -28,11 +31,17 @@ exports.admin_login = (req, res) => {
   if (!errors.isEmpty()) {
     res.render("admin", { validaciones: errors.array() });
   } else {
-    res.send("validacion exitosa");
+    passport.authenticate("local", {
+      successRedirect: "/admin/menu",
+      failureRedirect: "/admin",
+    })(req, res);
   }
 };
 
 exports.admin_menu = (req, res) => {
+  if (!req.user) {
+    return res.redirect("/admin");
+  }
   res.render("menu");
 };
 
