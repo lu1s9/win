@@ -1,13 +1,8 @@
 const sqlite3 = require("sqlite3");
 const {validationResult } = require("express-validator");
 const passport = require("passport");
+const db = require("../db")
 
-const db = new sqlite3.Database(process.env.DB, (err) => {
-  if (err) {
-    console.error(err.message);
-  }
-  console.log("Connected to database");
-});
 
 exports.index = (req, res) => {
   db.get("SELECT * FROM menu WHERE id_menu=?", 1, (err, menu) => {

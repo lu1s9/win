@@ -7,12 +7,7 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const bcryptjs = require('bcryptjs')
 
-const db = new sqlite3.Database(process.env.DB, (err) => {
-  if (err) {
-    console.error(err.message);
-  }
-  console.log("Connected to database");
-});
+const db = require("../db")
 
 passport.use(new LocalStrategy(function verify(username, password, cb){
   db.get('SELECT * FROM users WHERE username=?', username, function(err, user){
