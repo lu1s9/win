@@ -16,3 +16,17 @@ exports.admin_login = (req, res) => {
     res.send("validacion exitosa");
   }
 };
+
+exports.admin_menu = (req, res) => {
+    res.render("menu")
+}
+
+exports.admin_edit_menu = (req,res) => {
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+        console.log(errors.array())
+        res.render("menu", {validaciones: errors.array(), valores: req.body})
+    } else {
+        res.send('validacion exitosa')
+    }
+}

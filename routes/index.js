@@ -14,4 +14,17 @@ router.post(
   controller.admin_login
 );
 
+
+router.get("/admin/menu", controller.admin_menu)
+
+router.post(
+  "/admin/menu",
+  body("primerTiempo", "Completa el primer campo").exists().not().isEmpty().bail().isLength({ min: 10 }),
+  body("segundoTiempo", "Completa el segundo campo").exists().not().isEmpty().bail().isLength({ min: 10 }),
+  body("tercerTiempo", "Completa el tercer campo").exists().not().isEmpty().bail().isLength({ min: 10 }),
+  controller.admin_edit_menu
+);
+
+
+
 module.exports = router;

@@ -1,0 +1,30 @@
+<%- include("template/header", {title: 'Desayunos y comidas Win'});  %> 
+<div class="container">
+<h1>Editar Menú del Día</h1>
+<form action="/admin/menu" method="post">
+<div class="mb-3">
+    <label for="primerTiempo" class="form-label">Primer Tiempo</label>
+    <input type="text" class="form-control" id="primerTiempo" name="primerTiempo" value="<% if (typeof valores !='undefined') { %> <%= valores.primerTiempo %> <% } %>">
+</div>
+<div class="mb-3">
+    <label for="segundoTiempo" class="form-label">Segundo Tiempo</label>
+    <input type="text" class="form-control" id="segundoTiempo" name="segundoTiempo" value="<% if (typeof valores !='undefined') { %> <%= valores.segundoTiempo %> <% } %>">
+</div>
+<div class="mb-3">
+    <label for="tercerTiempo" class="form-label">Tercer Tiempo</label>
+    <input type="text" class="form-control" id="tercerTiempo" name="tercerTiempo" value="<% if (typeof valores !='undefined') { %> <%= valores.tercerTiempo %> <% } %>">
+</div>
+<button type="submit" class="btn btn-primary">Guardar</button>
+</form>
+<% if (typeof validaciones != 'undefined') { %>
+    <% validaciones.forEach(validacion => { %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong><%= validacion.msg %> </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+    <% }) %>
+<% } %>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+</body>
+</html>
