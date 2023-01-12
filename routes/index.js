@@ -64,9 +64,9 @@ router.get("/admin/menu", controller.admin_menu)
 
 router.post(
   "/admin/menu",
-  body("primerTiempo", "Completa el primer campo").exists().not().isEmpty().bail().isLength({ min: 10 }),
-  body("segundoTiempo", "Completa el segundo campo").exists().not().isEmpty().bail().isLength({ min: 10 }),
-  body("tercerTiempo", "Completa el tercer campo").exists().not().isEmpty().bail().isLength({ min: 10 }),
+  body("primerTiempo", "Selecciona al menos una opción en el Primer tiempo").exists(),
+  body("segundoTiempo", "Selecciona al menos una opción en el Segundo tiempo").exists(),
+  body("tercerTiempo", "Completa el tercer campo").exists().trim().not().isEmpty(),
   controller.admin_edit_menu
 );
 

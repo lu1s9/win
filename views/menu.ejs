@@ -2,18 +2,42 @@
 <div class="container">
 <h1>Editar Menú del Día</h1>
 <form action="/admin/menu" method="post">
-<div class="mb-3">
-    <label for="primerTiempo" class="form-label">Primer Tiempo</label>
-    <input type="text" class="form-control" id="primerTiempo" name="primerTiempo" value="<% if (typeof valores !='undefined') { %> <%= valores.primerTiempo %> <% } %>">
+<legend>Primer Tiempo:</legend>
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="Sopa de pasta" id="sopa_de_pasta" checked name="primerTiempo">
+    <label class="form-check-label" for="sopa_de_pasta">
+      Sopa de pasta
+    </label>
 </div>
-<div class="mb-3">
-    <label for="segundoTiempo" class="form-label">Segundo Tiempo</label>
-    <input type="text" class="form-control" id="segundoTiempo" name="segundoTiempo" value="<% if (typeof valores !='undefined') { %> <%= valores.segundoTiempo %> <% } %>">
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="Sopa de lentejas" id="sopa_de_lentejas" name="primerTiempo">
+    <label class="form-check-label" for="sopa_de_lentejas">
+      Sopa de lentejas
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="Consome de pollo" id="consome_de_pollo" name="primerTiempo">
+    <label class="form-check-label" for="consome_de_pollo">
+      Consome de pollo
+    </label>
+</div>
+<legend>Segundo Tiempo:</legend>
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="Arroz" id="arroz" checked name="segundoTiempo">
+    <label class="form-check-label" for="arroz">
+      Arroz
+    </label>
+</div>
+<div class="form-check">
+    <input class="form-check-input" type="checkbox" value="Espaguetti" id="espaguetti" name="segundoTiempo">
+    <label class="form-check-label" for="espaguetti">
+      Espaguetti
+    </label>
 </div>
 <div class="mb-3">
     <label for="tercerTiempo" class="form-label">Tercer Tiempo</label>
     <input type="text" class="form-control" id="tercerTiempo" name="tercerTiempo" value="<% if (typeof valores !='undefined') { %> <%= valores.tercerTiempo %> <% } %>">
-</div>
+</div>  
 <button type="submit" class="btn btn-primary">Guardar</button>
 </form>
 <% if (typeof validaciones != 'undefined') { %>
